@@ -1,0 +1,409 @@
+I’ll simulate this exactly as if you were starting your invoice SaaS knowledge base next week.
+
+⸻
+
+Day 1: Initial Setup
+
+Install
+
+npm create astro@latest
+
+Choose:
+
+Project: docs
+Template: Empty
+Install dependencies: Yes
+Typescript: Strict
+
+Install Starlight:
+
+npx astro add starlight
+
+Result:
+
+docs/
+├─ src/
+├─ astro.config.mjs
+├─ package.json
+├─ public/
+└─ ...
+
+⸻
+
+Configure Starlight
+
+astro.config.mjs
+
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'InvoiceApp Docs',
+      social: {
+        github: 'https://github.com/company/docs'
+      },
+      sidebar: [
+        {
+          label: 'Getting Started',
+          items: [
+            { slug: 'getting-started/overview' }
+          ]
+        }
+      ]
+    })
+  ]
+});
+
+Run:
+
+npm run dev
+
+Open:
+
+http://localhost:4321
+
+You now have a documentation website.
+
+⸻
+
+Day 1: First Docs
+
+Create:
+
+src/content/docs/
+
+Structure:
+
+src/content/docs/
+getting-started/
+  overview.md
+invoices/
+  create-invoice.md
+  recurring-invoices.md
+payments/
+  collect-payment.md
+
+⸻
+
+Example Article
+
+create-invoice.md
+
+---
+title: Create an Invoice
+description: Learn how to create invoices.
+---
+# Create an Invoice
+To create an invoice:
+1. Open Invoices
+2. Click New Invoice
+3. Select customer
+4. Add line items
+5. Save
+
+That’s it.
+
+No React.
+
+No special syntax.
+
+⸻
+
+Day 2: Add More Structure
+
+Knowledge base grows.
+
+Getting Started
+├─ Overview
+├─ Setup Organization
+├─ Invite Team
+Invoices
+├─ Create Invoice
+├─ Draft Invoice
+├─ Recurring Invoice
+├─ Partial Payment
+Payments
+├─ Record Payment
+├─ Stripe Integration
+├─ FPX Integration
+Customers
+├─ Add Customer
+├─ Import Customer
+
+Each page:
+
+1 markdown file
+
+⸻
+
+Day 3: Deploy to Github
+
+Create repo:
+
+invoice-docs
+
+Push:
+
+git init
+git add .
+git commit -m "initial docs"
+git remote add origin ...
+git push
+
+Done.
+
+⸻
+
+Day 3: Deploy to Cloudflare Pages
+
+Create project in:
+
+Cloudflare Pages￼
+
+Connect Github.
+
+Build settings:
+
+Framework Preset:
+Astro
+Build Command:
+npm run build
+Output Directory:
+dist
+
+Deploy.
+
+Cloudflare automatically detects Astro.
+
+Result:
+
+https://invoice-docs.pages.dev
+
+Live.
+
+⸻
+
+Day 4: Custom Domain
+
+Add:
+
+docs.yourdomain.com
+
+Cloudflare handles:
+
+SSL
+CDN
+Caching
+
+automatically.
+
+No ACM.
+
+No CloudFront.
+
+No Route53.
+
+⸻
+
+Week 1: Add PostHog
+
+Install:
+
+npm install posthog-js
+
+Create:
+
+src/components/Posthog.astro
+<script>
+import posthog from 'posthog-js';
+posthog.init(
+  'YOUR_KEY',
+  {
+    api_host: 'https://app.posthog.com'
+  }
+);
+</script>
+
+Add to layout.
+
+Done.
+
+Now track:
+
+Page Views
+Top Articles
+Searches
+Bounce Rate
+
+⸻
+
+Week 2: Add Search
+
+Option A:
+
+Built-in Pagefind.
+
+Install:
+
+npx astro add pagefind
+
+Done.
+
+Cost:
+
+$0
+
+⸻
+
+Option B:
+
+Later.
+
+Add:
+
+Algolia DocSearch￼
+
+for larger documentation sets.
+
+⸻
+
+Month 1: AI Optimization
+
+Add:
+
+public/
+├─ robots.txt
+├─ llms.txt
+
+Example:
+
+llms.txt
+
+InvoiceApp Documentation
+Main docs:
+https://docs.invoiceapp.com/getting-started
+https://docs.invoiceapp.com/invoices
+https://docs.invoiceapp.com/payments
+
+Search engines and AI crawlers can discover it.
+
+⸻
+
+Month 2: AI Search
+
+Create pipeline:
+
+Markdown
+    ↓
+Chunk
+    ↓
+Embedding
+    ↓
+Vector DB
+    ↓
+Ask AI
+
+Source documents:
+
+src/content/docs/
+
+All content already exists as markdown.
+
+No migration.
+
+⸻
+
+Month 6: Analytics-Driven Improvements
+
+Using PostHog:
+
+You discover:
+
+"partial payment"
+
+is searched 500 times/month.
+
+But:
+
+Article views:
+12
+
+Meaning:
+
+Users cannot find answer
+
+Create:
+
+payments/partial-payments.md
+
+Traffic problem solved.
+
+⸻
+
+Month 12: Team Workflow
+
+Support team wants to contribute.
+
+Workflow:
+
+Support finds issue
+       ↓
+Create markdown file
+       ↓
+Git PR
+       ↓
+Review
+       ↓
+Merge
+       ↓
+Auto deploy
+
+No infrastructure work.
+
+No AWS work.
+
+No React work.
+
+⸻
+
+What the repository might look like after 1 year
+
+invoice-docs
+src/content/docs/
+getting-started/
+  overview.md
+  quickstart.md
+invoices/
+  create.md
+  recurring.md
+  instalments.md
+  e-invoice-malaysia.md
+payments/
+  stripe.md
+  fpx.md
+  allocations.md
+customers/
+  import.md
+integrations/
+  xero.md
+  quickbooks.md
+api/
+  invoices.md
+  payments.md
+troubleshooting/
+  invoice-not-paid.md
+  payment-failed.md
+guides/
+  reduce-late-payments.md
+  invoice-best-practices.md
+
+This is why I think Starlight fits your use case so well. The workflow remains almost unchanged from day 1 to year 3:
+
+Write Markdown
+      ↓
+Git Push
+      ↓
+Cloudflare Deploy
+
+while Docusaurus teams often start similarly but gradually accumulate React components, plugins, theme customizations, and other maintenance overhead as the site grows. For a documentation-driven acquisition strategy, that simplicity is often a better return on engineering time.
